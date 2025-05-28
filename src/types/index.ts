@@ -35,6 +35,7 @@ export type CartState = {
   removeItem: (productId: string) => void
   updateQuantity: (productId: string, quantity: number) => void
   clearCart: () => void
+  getItemQuantity: (productId: string) => number
   getTotalItems: () => number
   getTotalPrice: () => number
 }
