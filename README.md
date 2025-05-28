@@ -1,20 +1,24 @@
-# Task Management
+# Product Shop
 
-A simple task management app built with React and Tailwind CSS.
+A simple product shop built with React, React Router, and Tailwind CSS.
 
 ## Features
 
-- [x] Add a task
-- [x] Toggle task as complete
-- [x] Delete a task
-- [x] Clear all completed tasks
+- [x] Login and register
+- [x] Add products to cart
+- [x] View product details
+- [x] Filter products by category
+- [x] Search products
 
 ## Tech Stack
 
 - React
+- React Router v6
+- Zustand
 - Tailwind CSS
 - TypeScript
 - Vite
+- Faker.js
 
 ## Getting Started
 
@@ -23,7 +27,7 @@ Require Node.js and pnpm installed.
 1. Install dependencies
 
    ```bash
-   pnpm install
+   pnpm install # also will run postinstall script
    ```
 
 2. Run development server
