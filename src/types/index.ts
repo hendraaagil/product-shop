@@ -1,4 +1,4 @@
-export interface Product {
+export type Product = {
   id: string
   name: string
   description: string
@@ -10,19 +10,18 @@ export interface Product {
   reviews: number
 }
 
-export interface User {
+export type User = {
   id: string
   email: string
   name: string
-  avatar?: string
 }
 
-export interface CartItem {
+export type CartItem = {
   product: Product
   quantity: number
 }
 
-export interface AuthState {
+export type AuthState = {
   user: User | null
   isAuthenticated: boolean
   login: (email: string, password: string) => Promise<boolean>
@@ -30,7 +29,7 @@ export interface AuthState {
   logout: () => void
 }
 
-export interface CartState {
+export type CartState = {
   items: CartItem[]
   addItem: (product: Product, quantity?: number) => void
   removeItem: (productId: string) => void
