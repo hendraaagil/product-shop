@@ -21,7 +21,3 @@ export const searchProducts = (query: string): Product[] => {
       product.category.toLowerCase().includes(lowerQuery),
   )
 }
-
-export const getCategories = (): string[] => {
-  return categories
-}
