@@ -6,7 +6,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   isActive?: boolean
 }
 
-export default function Button({
+export function Button({
   children,
   className,
   variant,
@@ -18,7 +18,7 @@ export default function Button({
     <button
       {...props}
       className={cn(
-        'cursor-pointer font-medium transition-colors focus:ring-2 focus:ring-blue-200 focus:outline-none',
+        'flex cursor-pointer items-center justify-center font-medium transition-colors focus:ring-2 focus:ring-blue-200 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
         {
           'bg-blue-500 text-white hover:bg-blue-600': variant === 'primary',
           'bg-gray-200 text-gray-800 hover:bg-gray-300':
