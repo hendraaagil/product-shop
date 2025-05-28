@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import {
   Link,
+  useLocation,
   Form,
   useActionData,
   useNavigation,
@@ -17,67 +18,49 @@ import AuthContainer from '@/components/layout/auth-container'
 
 export async function action({ request }: { request: Request }) {
   const formData = await request.formData()
-  const name = formData.get('name') as string
   const email = formData.get('email') as string
   const password = formData.get('password') as string
-  const confirmPassword = formData.get('confirmPassword') as string
-
-  if (password !== confirmPassword) {
-    return { error: 'Passwords do not match' }
-  }
-
-  if (password.length < 6) {
-    return { error: 'Password must be at least 6 characters long' }
-  }
+  const redirectTo = formData.get('redirectTo') as string
 
   try {
-    const success = await useAuthStore
-      .getState()
-      .register(email, password, name)
+    const success = await useAuthStore.getState().login(email, password)
     if (success) {
-      return redirect('/')
+      return redirect(redirectTo || '/')
     } else {
-      return { error: 'Email already exists. Please use a different email.' }
+      return { error: 'Invalid email or password' }
     }
   } catch {
     return { error: 'An error occurred. Please try again.' }
   }
 }
 
-export function Register() {
+export function Login() {
   const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const navigation = useNavigation()
   const actionData = useActionData() as { error?: string } | undefined
+  const location = useLocation()
+
+  const searchParams = new URLSearchParams(location.search)
+  const from = searchParams.get('from') || location.state?.from?.pathname || '/'
   const isSubmitting = navigation.state === 'submitting'
 
   return (
     <AuthContainer
-      title="Create your account"
-      description="Join us today and start shopping!"
+      title="Sign in to your account"
+      description="Welcome back! Please sign in to continue shopping."
     >
       <>
         <Card>
           <CardContent className="p-6">
             <Form method="post" className="space-y-4">
+              <input type="hidden" name="redirectTo" value={from} />
+
               {actionData?.error && (
                 <div className="border border-red-200 bg-red-50 p-3 text-sm text-red-600">
                   {actionData.error}
                 </div>
               )}
-
-              <div>
-                <Label htmlFor="name">Full Name</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Enter your full name"
-                  className="w-full"
-                  required
-                />
-              </div>
 
               <div>
                 <Label htmlFor="email">Email address</Label>
@@ -86,6 +69,7 @@ export function Register() {
                   name="email"
                   type="email"
                   placeholder="Enter your email"
+                  defaultValue="demo@example.com"
                   className="w-full"
                   required
                 />
@@ -98,36 +82,14 @@ export function Register() {
                     id="password"
                     name="password"
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="Create a password"
+                    placeholder="Enter your password"
+                    defaultValue="password"
                     className="w-full"
                     required
                   />
                   <TogglePassword
                     onToggle={() => setShowPassword(!showPassword)}
                     showPassword={showPassword}
-                  />
-                </div>
-                <p className="mt-1 text-xs text-gray-500">
-                  Must be at least 6 characters long
-                </p>
-              </div>
-
-              <div>
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
-                <div className="relative">
-                  <Input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type={showConfirmPassword ? 'text' : 'password'}
-                    placeholder="Confirm your password"
-                    className="w-full"
-                    required
-                  />
-                  <TogglePassword
-                    onToggle={() =>
-                      setShowConfirmPassword(!showConfirmPassword)
-                    }
-                    showPassword={showConfirmPassword}
                   />
                 </div>
               </div>
@@ -138,7 +100,7 @@ export function Register() {
                 className="w-full"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Creating account...' : 'Create account'}
+                {isSubmitting ? 'Signing in...' : 'Sign in'}
               </Button>
             </Form>
           </CardContent>
@@ -146,12 +108,12 @@ export function Register() {
 
         <div className="text-center">
           <p className="text-sm text-gray-600">
-            Already have an account?{' '}
+            Don't have an account?{' '}
             <Link
-              to="/login"
+              to="/register"
               className="font-medium text-blue-600 hover:text-blue-500"
             >
-              Sign in here
+              Create one here
             </Link>
           </p>
         </div>
