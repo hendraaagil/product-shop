@@ -99,6 +99,7 @@ export function Cart() {
                         updateQuantity(item.product.id, item.quantity - 1)
                       }
                       disabled={item.quantity <= 1}
+                      title="Decrease quantity"
                     >
                       <Minus className="size-4" />
                     </Button>
@@ -112,6 +113,7 @@ export function Cart() {
                         updateQuantity(item.product.id, item.quantity + 1)
                       }
                       disabled={item.quantity >= item.product.stock}
+                      title="Increase quantity"
                     >
                       <Plus className="size-4" />
                     </Button>
@@ -121,6 +123,7 @@ export function Cart() {
                     variant="danger"
                     size="icon"
                     onClick={() => removeItem(item.product.id)}
+                    title="Remove item"
                   >
                     <Trash2 className="size-4" />
                   </Button>

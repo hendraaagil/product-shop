@@ -154,6 +154,7 @@ export function ProductDetail() {
                             size="icon"
                             onClick={decreaseQuantity}
                             disabled={quantity <= 1}
+                            title="Decrease quantity"
                           >
                             <Minus className="size-4" />
                           </Button>
@@ -165,6 +166,7 @@ export function ProductDetail() {
                             size="icon"
                             onClick={increaseQuantity}
                             disabled={totalQuantity >= product.stock}
+                            title="Increase quantity"
                           >
                             <Plus className="size-4" />
                           </Button>

@@ -41,6 +41,7 @@ export default function Navigation() {
               size="icon"
               onClick={handleCartClick}
               className="relative"
+              title="Cart"
             >
               <ShoppingCart className="size-5" />
               {isAuthenticated && getTotalItems() > 0 && (
@@ -58,13 +59,18 @@ export default function Navigation() {
                 <p className="text-gray-600">
                   Hello, <span className="font-medium">{user?.name}</span>
                 </p>
-                <Button variant="danger" size="icon" onClick={handleLogout}>
+                <Button
+                  variant="danger"
+                  size="icon"
+                  onClick={handleLogout}
+                  title="Logout"
+                >
                   <LogOut className="size-5" />
                 </Button>
               </div>
             ) : (
               <Link to="/login">
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" title="Login">
                   <User className="size-5" />
                 </Button>
               </Link>
@@ -76,6 +82,7 @@ export default function Navigation() {
             size="icon"
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            title="Menu"
           >
             {isMenuOpen ? (
               <X className="size-5" />
