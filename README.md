@@ -2,6 +2,11 @@
 
 A simple product shop built with React, React Router, and Tailwind CSS.
 
+To try it out on [live demo](https://product-shop.hndr.xyz/), you can use the following credentials:
+
+- Email: `demo@example.com`
+- Password: `password`
+
 ## Features
 
 - [x] Login and register
