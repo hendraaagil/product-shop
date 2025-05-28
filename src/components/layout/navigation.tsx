@@ -42,11 +42,11 @@ export default function Navigation() {
               onClick={handleCartClick}
               className="relative"
             >
-              <ShoppingCart className="h-5 w-5" />
+              <ShoppingCart className="size-5" />
               {isAuthenticated && getTotalItems() > 0 && (
                 <Badge
                   variant="secondary"
-                  className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full p-0 text-xs"
+                  className="absolute -top-2 -right-2 flex size-5 items-center justify-center rounded-full p-0 text-xs"
                 >
                   {getTotalItems()}
                 </Badge>
@@ -59,13 +59,13 @@ export default function Navigation() {
                   Hello, <span className="font-medium">{user?.name}</span>
                 </p>
                 <Button variant="danger" size="icon" onClick={handleLogout}>
-                  <LogOut className="h-5 w-5" />
+                  <LogOut className="size-5" />
                 </Button>
               </div>
             ) : (
               <Link to="/login">
                 <Button variant="ghost" size="icon">
-                  <User className="h-5 w-5" />
+                  <User className="size-5" />
                 </Button>
               </Link>
             )}
@@ -78,9 +78,9 @@ export default function Navigation() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
-              <X className="h-5 w-5" />
+              <X className="size-5" />
             ) : (
-              <Menu className="h-5 w-5" />
+              <Menu className="size-5" />
             )}
           </Button>
         </div>
@@ -96,7 +96,7 @@ export default function Navigation() {
                   setIsMenuOpen(false)
                 }}
               >
-                <ShoppingCart className="mr-2 h-5 w-5" />
+                <ShoppingCart className="mr-2 size-5" />
                 Cart {isAuthenticated && `(${getTotalItems()})`}
               </Button>
 
@@ -115,14 +115,14 @@ export default function Navigation() {
                       setIsMenuOpen(false)
                     }}
                   >
-                    <LogOut className="mr-2 h-5 w-5" />
+                    <LogOut className="mr-2 size-5" />
                     Logout
                   </Button>
                 </>
               ) : (
                 <Link to="/login" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="ghost" className="w-full justify-start">
-                    <User className="mr-2 h-5 w-5" />
+                    <User className="mr-2 size-5" />
                     Login
                   </Button>
                 </Link>
