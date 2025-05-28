@@ -1,6 +1,5 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { faker } from '@faker-js/faker'
 
 import type { AuthState, User } from '@/types'
 
@@ -9,7 +8,6 @@ const mockUsers: User[] = [
     id: '1',
     email: 'demo@example.com',
     name: 'Demo User',
-    avatar: faker.image.avatar(),
   },
 ]
 
@@ -33,10 +31,9 @@ export const useAuthStore = create<AuthState>()(
 
         if (password === 'password') {
           const user: User = {
-            id: faker.string.uuid(),
+            id: crypto.randomUUID(),
             email,
             name: email.split('@')[0],
-            avatar: faker.image.avatar(),
           }
           mockUsers.push(user)
           set({ user, isAuthenticated: true })
@@ -56,10 +53,9 @@ export const useAuthStore = create<AuthState>()(
         }
 
         const user: User = {
-          id: faker.string.uuid(),
+          id: crypto.randomUUID(),
           email,
           name,
-          avatar: faker.image.avatar(),
         }
 
         mockUsers.push(user)
