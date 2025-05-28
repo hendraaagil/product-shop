@@ -1,1 +1,5 @@
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Gabarito', sans-serif;
+}
