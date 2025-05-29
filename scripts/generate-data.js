@@ -35,14 +35,6 @@ const data = {
 }
 
 const outputPath = path.join(process.cwd(), 'src/data/products.json')
-const outputDir = path.dirname(outputPath)
-
-// Create directory if it doesn't exist
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir, { recursive: true })
-}
-
-// Write the data to JSON file
 fs.writeFileSync(outputPath, JSON.stringify(data, null, 2))
 
 console.log(
