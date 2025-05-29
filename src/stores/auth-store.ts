@@ -30,14 +30,11 @@ export const useAuthStore = create<AuthState>()(
         }
 
         if (password === 'password') {
-          const user: User = {
-            id: crypto.randomUUID(),
-            email,
-            name: email.split('@')[0],
+          const user = mockUsers.find((u) => u.email === email)
+          if (user) {
+            set({ user, isAuthenticated: true })
+            return true
           }
-          mockUsers.push(user)
-          set({ user, isAuthenticated: true })
-          return true
         }
 
         return false
