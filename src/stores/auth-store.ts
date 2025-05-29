@@ -21,14 +21,6 @@ export const useAuthStore = create<AuthState>()(
         // Simulate API delay
         await new Promise((resolve) => setTimeout(resolve, 1000))
 
-        if (email === 'demo@example.com' && password === 'password') {
-          const user = mockUsers.find((u) => u.email === email)
-          if (user) {
-            set({ user, isAuthenticated: true })
-            return true
-          }
-        }
-
         if (password === 'password') {
           const user = mockUsers.find((u) => u.email === email)
           if (user) {
